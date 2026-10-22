@@ -282,9 +282,9 @@ const TRACK = [['plan','읽을 예정','Plan'],['reading','읽는 중','Reading'
 const TRACK_NAME = Object.fromEntries(TRACK.map(t => [t[0], t[2]]));
 const GENRES = ['Action','Adventure','Comedy','Drama','Fantasy','Horror','Mystery','Psychological','Romance','Sci-Fi','Slice of Life','Sports','Supernatural','Thriller','Music'];
 const SOURCES = [
-  {k:'trending',ko:'급상승',en:'Trending',sort:'TRENDING_DESC',pages:2},
-  {k:'top',ko:'평점',en:'Top rated',sort:'SCORE_DESC',pages:2},
-  {k:'popular',ko:'인기',en:'Popular',sort:'POPULARITY_DESC',pages:4},
+  {k:'trending',ko:'급상승',en:'Trending',sort:'TRENDING_DESC',pages:5},
+  {k:'top',ko:'평점',en:'Top rated',sort:'SCORE_DESC',pages:5},
+  {k:'popular',ko:'인기',en:'Popular',sort:'POPULARITY_DESC',pages:10},
   {k:'all',ko:'전체',en:'Browse all'},
   {k:'mine',ko:'내 서재',en:'My list'},
   {k:'foryou',ko:'추천',en:'For you'},
@@ -324,7 +324,7 @@ function addMedia(list){ const ids = []; for (const x of list) { if (x.countryOf
 function hay(m){ return m._h || (m._h = (m.title+' '+m.alt+' '+m.native+' '+m.tags.join(' ')+' '+m.genres.join(' ')).toLowerCase()); }
 
 /* ================= cache ================= */
-const CACHE_KEY = 'manhwa-radar-cache-v2', LIST_KEY = 'manhwa-radar-list-v1', TTL = 6 * 3600e3;
+const CACHE_KEY = 'manhwa-radar-cache-v3', LIST_KEY = 'manhwa-radar-list-v1', TTL = 6 * 3600e3;
 function saveCache(){
   try { localStorage.setItem(CACHE_KEY, JSON.stringify({at:fetchedAt, lists:LISTS, media:[...CAT.values()].filter(m => LISTS.trending.includes(m.id) || LISTS.top.includes(m.id) || LISTS.popular.includes(m.id)).map(({_h, ...m}) => m)})); }
   catch { try { localStorage.removeItem(CACHE_KEY); } catch {} }
